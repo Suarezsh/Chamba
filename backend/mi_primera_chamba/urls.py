@@ -1,5 +1,5 @@
 """
-URL configuration for Mi_Primera_Chamba project.
+URL configuration for mi_primera_chamba project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
