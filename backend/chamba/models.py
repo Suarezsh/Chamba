@@ -1,3 +1,4 @@
+
 from django.db import models
 
 class Usuario(models.Model):
@@ -12,7 +13,7 @@ class Usuario(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     tipo = models.CharField(max_length=10, choices=TIPO_USUARIO)
-    foto_perfil = models.BinaryField(null=True, blank=True)
+    foto_perfil = models.ImageField(upload_to='usuarios/', null=True, blank=True)
     ubicacion = models.TextField(null=True, blank=True)
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
