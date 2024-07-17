@@ -8,3 +8,5 @@ admin.site.register(Categoria)
 admin.site.register(Chamba)
 admin.site.register(Postulacion)
 admin.site.register(Mensaje)
+
+#Los modelos funcionan!
