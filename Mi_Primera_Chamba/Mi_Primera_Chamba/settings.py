@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mi_primera_chamba_crud',
+    'api'
 ]
 
 MIDDLEWARE = [
