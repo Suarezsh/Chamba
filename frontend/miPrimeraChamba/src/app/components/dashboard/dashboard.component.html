@@ -1,0 +1,12 @@
+<div>
+    <h1>Dashboard</h1>
+    <p>Nombre: {{ nombre }}</p>
+    <p>Apellido: {{ apellido }}</p>
+    <ng-container *ngIf="tipo === 'trabajador'">
+      <app-trabajador></app-trabajador>
+    </ng-container>
+    <ng-container *ngIf="tipo === 'empleador'">
+      <app-empleador></app-empleador>
+    </ng-container>
+  </div>
+  
