@@ -68,3 +68,14 @@ p.error {
     margin-top: 10px;
     text-align: center;
 }
+
+a[routerLink] {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+a[routerLink]:hover {
+    text-decoration: underline;
+    color: #13559c;
+}
