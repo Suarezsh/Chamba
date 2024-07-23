@@ -8,3 +8,10 @@ div {
     margin: 0 auto;
     box-sizing: border-box;
   }
+
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-size: 30px;
+  }
