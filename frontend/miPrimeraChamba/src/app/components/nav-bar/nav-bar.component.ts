@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -19,7 +18,16 @@ export class NavBarComponent {
     this.registered = false;
     // authService.logout();
   }
+
   isRegistered(): boolean {
     return this.registered;
+  }
+
+  register() {
+    window.location.href = "/registrarse";
+  }
+  
+  login() {
+    window.location.href = "/iniciar-sesion";
   }
 }
