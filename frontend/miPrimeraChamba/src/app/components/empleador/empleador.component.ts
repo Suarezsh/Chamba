@@ -12,17 +12,15 @@ export class EmpleadorComponent implements OnInit {
   descripcion: string = '';
   fechaInicio: string = '';
   fechaFin: string = '';
-  chambas: any[] = []; 
-
-  destinatarioId: number = 0;
+  chambas: any[] = [];
   mensaje: string = '';
-  mensajes: any = { mensajes_enviados: [], mensajes_recibidos: [] }; 
+  trabajadores: any[] = [];
 
   constructor(private authService: AuthService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
     this.obtenerChambas();
-    this.obtenerMensajes();
+    this.listarTrabajadores();
   }
 
   crearChamba(): void {
@@ -37,9 +35,8 @@ export class EmpleadorComponent implements OnInit {
       };
       this.authService.crearChamba(nuevaChamba).subscribe(
         (response: any) => {
-          console.log('Chamba creada con éxito:', response);
           this.limpiarFormulario();
-          this.obtenerChambas(); 
+          this.obtenerChambas();
         },
         (error: any) => {
           console.error('Error al crear la chamba:', error);
@@ -70,7 +67,6 @@ export class EmpleadorComponent implements OnInit {
     if (confirm('¿Estás seguro de que quieres eliminar esta chamba?')) {
       this.authService.eliminarChamba(chambaId).subscribe(
         (response: any) => {
-          console.log('Chamba eliminada con éxito:', response);
           this.obtenerChambas();
         },
         (error: any) => {
@@ -87,20 +83,18 @@ export class EmpleadorComponent implements OnInit {
     this.fechaFin = '';
   }
 
-
-  enviarMensaje(): void {
+  enviarMensaje(destinatarioId: number): void {
     const remitenteId = this.cookieService.get('userId');
-    if (remitenteId && this.destinatarioId && this.mensaje) {
+    if (remitenteId && destinatarioId && this.mensaje) {
       const nuevoMensaje = {
         remitente: remitenteId,
-        destinatario: this.destinatarioId,
+        destinatario: destinatarioId,
         mensaje: this.mensaje
       };
       this.authService.enviarMensaje(nuevoMensaje).subscribe(
         (response: any) => {
-          console.log('Mensaje enviado con éxito:', response);
           this.limpiarFormularioMensaje();
-          this.obtenerMensajes(); 
+          this.obtenerMensajes(destinatarioId);
         },
         (error: any) => {
           console.error('Error al enviar el mensaje:', error);
@@ -111,24 +105,35 @@ export class EmpleadorComponent implements OnInit {
     }
   }
 
-  obtenerMensajes(): void {
-    const usuarioId = this.cookieService.get('userId');
-    if (usuarioId) {
-      this.authService.listarMensajes(Number(usuarioId)).subscribe(
-        (response: any) => {
-          this.mensajes = response; 
-        },
-        (error: any) => {
-          console.error('Error al obtener los mensajes:', error);
+  obtenerMensajes(usuarioId: number): void {
+    this.authService.listarMensajes(usuarioId).subscribe(
+      (response: any) => {
+        const trabajador = this.trabajadores.find(t => t.usuario_id === usuarioId);
+        if (trabajador) {
+          trabajador.mensajes = response;
         }
-      );
-    } else {
-      console.error('Usuario no identificado');
-    }
+      },
+      (error: any) => {
+        console.error('Error al obtener los mensajes:', error);
+      }
+    );
   }
 
   limpiarFormularioMensaje(): void {
-    this.destinatarioId = 0;
     this.mensaje = '';
+  }
+
+  listarTrabajadores(): void {
+    this.authService.listarTrabajadores().subscribe(
+      (response: any) => {
+        this.trabajadores = response.map((trabajador: any) => ({
+          ...trabajador,
+          mensajes: { mensajes_enviados: [], mensajes_recibidos: [] }
+        }));
+      },
+      (error: any) => {
+        console.error('Error al listar los trabajadores:', error);
+      }
+    );
   }
 }
