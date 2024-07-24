@@ -1,9 +1,13 @@
-<div>
-  <h1>Dashboard</h1>
-  <p>Nombre: {{ nombre }}</p>
-  <p>Apellido: {{ apellido }}</p>
+<div> 
+  <nav>
+    <h1>Dashboard</h1>
+    <p>Nombre: {{ nombre }}</p>
+    <p>Apellido: {{ apellido }}</p>
+  </nav>
 
-  <form (ngSubmit)="editarUsuario(editForm)" #editForm="ngForm">
+
+  <form (ngSubmit)="editarUsuario(editForm)" #editForm="ngForm"  class="editUser">
+
     <div>
       <label for="nombre">Nombre:</label>
       <input
@@ -14,6 +18,7 @@
         required
       />
     </div>
+    
     <div>
       <label for="apellido">Apellido:</label>
       <input
@@ -47,12 +52,20 @@
   </form>
 
   <ng-container *ngIf="tipo === 'trabajador'">
+
     <app-trabajador></app-trabajador>
+
   </ng-container>
+
+
   <ng-container *ngIf="tipo === 'empleador'">
     <app-empleador></app-empleador>
   </ng-container>
 
-  <button (click)="cerrarSesion()">Cerrar sesión</button>
-  <button (click)="generarPDF()">Generar PDF</button>
+  
+  <div class="button">
+    <button (click)="cerrarSesion()">Cerrar sesión</button>
+    <button (click)="generarPDF()">Generar PDF</button>
+  </div>
+
 </div>
