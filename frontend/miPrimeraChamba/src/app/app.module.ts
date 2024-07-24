@@ -10,13 +10,18 @@ import { IniciarSesionComponent } from './components/iniciar-sesion/iniciar-sesi
 import { RegistrarseComponent } from './components/registrarse/registrarse.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TrabajadorComponent } from './components/trabajador/trabajador.component';
-import { EmpleadorComponent } from './components/empleador/empleador.component'; 
+import { EmpleadorComponent } from './components/empleador/empleador.component';
+import { MainComponent } from './components/main/main.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { PanelInfoComponent } from './components/panel-info/panel-info.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component'; 
 
 const routes: Routes = [
   { path: 'registrarse', component: RegistrarseComponent },
   { path: 'iniciar-sesion', component: IniciarSesionComponent },
   { path: 'dashboard', component: DashboardComponent }, 
-  { path: '', redirectTo: '/iniciar-sesion', pathMatch: 'full' }
+  { path: '', component: MainComponent}
 ];
 
 @NgModule({
@@ -26,7 +31,12 @@ const routes: Routes = [
     IniciarSesionComponent,
     DashboardComponent,
     TrabajadorComponent,
-    EmpleadorComponent
+    EmpleadorComponent,
+    MainComponent,
+    FooterComponent,
+    NavBarComponent,
+    PanelInfoComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
