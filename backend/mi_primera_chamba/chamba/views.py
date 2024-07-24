@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password, make_password
 from .models import Usuario, Trabajador, Empleador, Chamba, Mensaje
-from .serializers import RegistroUsuarioSerializer, UsuarioSerializer, ChambaSerializer, TrabajadorSerializer, MensajeSerializer
+from django.shortcuts import get_object_or_404
+from .serializers import UsuarioEditSerializer, RegistroUsuarioSerializer, UsuarioSerializer, ChambaSerializer, TrabajadorSerializer, MensajeSerializer, TrabajadorDetailSerializer
 
 class RegistroUsuarioView(APIView):
     def post(self, request):
@@ -47,14 +48,14 @@ class ObtenerUsuarioView(APIView):
 
 class CrearChambaView(APIView):
     def post(self, request):
-        usuario_id = request.data.get('empleador_id') 
+        usuario_id = request.data.get('empleador_id')  # Usa el ID del usuario
         try:
-            empleador = Empleador.objects.get(usuario_id=usuario_id) 
+            empleador = Empleador.objects.get(usuario_id=usuario_id)  # Obtén el Empleador por el ID del usuario
         except Empleador.DoesNotExist:
             return Response({"error": "Empleador no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
         data = request.data.copy()
-        data['empleador'] = empleador.usuario.id 
+        data['empleador'] = empleador.usuario.id  # Usa el ID del usuario del empleador
         serializer = ChambaSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -118,3 +119,77 @@ class ListarMensajesView(APIView):
             "mensajes_enviados": serializer_enviados.data,
             "mensajes_recibidos": serializer_recibidos.data
         }, status=status.HTTP_200_OK)
+        
+class ObtenerTrabajadorView(APIView):
+    def post(self, request):
+        usuario_id = request.data.get('id')
+        try:
+            trabajador = Trabajador.objects.get(usuario_id=usuario_id)
+        except Trabajador.DoesNotExist:
+            return Response({"error": "Trabajador no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TrabajadorSerializer(trabajador)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class EditarTrabajadorView(APIView):
+    def put(self, request):
+        usuario_id = request.data.get('id')
+        try:
+            trabajador = Trabajador.objects.get(usuario_id=usuario_id)
+        except Trabajador.DoesNotExist:
+            return Response({"error": "Trabajador no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = TrabajadorDetailSerializer(trabajador, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+class ListarChambasView(APIView):
+    def get(self, request):
+        chambas = Chamba.objects.all()
+        serializer = ChambaSerializer(chambas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class EditarUsuarioView(APIView):
+    def put(self, request):
+        usuario_id = request.data.get('id')
+        try:
+            usuario = Usuario.objects.get(id=usuario_id)
+        except Usuario.DoesNotExist:
+            return Response({"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UsuarioEditSerializer(usuario, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+from django.http import HttpResponse
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
+class GenerarPDFView(APIView):
+    def get(self, request, usuario_id):
+        try:
+            usuario = Usuario.objects.get(id=usuario_id)
+        except Usuario.DoesNotExist:
+            return Response({"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="usuario_{usuario_id}.pdf"'
+        
+        p = canvas.Canvas(response, pagesize=letter)
+        width, height = letter
+        
+        p.drawString(100, height - 100, f"ID: {usuario.id}")
+        p.drawString(100, height - 120, f"Nombre: {usuario.nombre}")
+        p.drawString(100, height - 140, f"Apellido: {usuario.apellido}")
+        p.drawString(100, height - 160, f"Email: {usuario.email}")
+        p.drawString(100, height - 180, f"Tipo: {usuario.tipo}")
+
+        p.showPage()
+        p.save()
+
+        return response
