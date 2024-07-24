@@ -51,4 +51,22 @@ export class AuthService {
   }
   
   
+
+  obtenerTrabajador(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/obtener-trabajador/`, { id });
+  }
+
+  actualizarTrabajador(id: number, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/editar-trabajador/`, { id, ...datos });
+  }
+  listarChambas(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/listar-chambas/`);
+  }
+  editarUsuario(datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/editar-usuario/`, datos);
+  }
+  generarPDF(usuarioId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/generar-pdf/${usuarioId}/`, { responseType: 'blob' });
+  }
+  
 }
