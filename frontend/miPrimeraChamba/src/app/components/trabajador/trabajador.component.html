@@ -1,5 +1,3 @@
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
 <div class="container">
     <h2>Editar Datos del Trabajador</h2>
     <form (submit)="actualizarDatosTrabajador()">
@@ -17,11 +15,14 @@
       <button type="submit" class="btn btn-primary">Actualizar Datos</button>
     </form>
   
+    <h2>Buscar Chambas</h2>
+    <input type="text" class="form-control" placeholder="Buscar chambas" [(ngModel)]="busqueda" (input)="filtrarChambas()">
+  
     <h2>Chambas Disponibles</h2>
     <ul class="list-group">
-      <li *ngFor="let chamba of chambas" class="list-group-item">
+      <li *ngFor="let chamba of chambasFiltradas" class="list-group-item">
         <h3>{{ chamba.titulo }}</h3>
-        <p><strong>Empleador:</strong> {{ chamba.empleador_usuario_id }} - {{ chamba.empleador_nombre }} {{ chamba.empleador_apellido }}</p>
+        <p><strong>Empleador:</strong>{{ chamba.empleador_nombre }} {{ chamba.empleador_apellido }}</p>
         <p>{{ chamba.descripcion }}</p>
         <p><strong>Inicio:</strong> {{ chamba.fecha_inicio }}</p>
         <p><strong>Fin:</strong> {{ chamba.fecha_fin }}</p>
@@ -40,13 +41,13 @@
       <details>
         <summary>Mensajes con el empleador {{ empleadoresInfo[empleadorId]?.nombre }} {{ empleadoresInfo[empleadorId]?.apellido }}</summary>
         <div class="mensajes">
-          <h3>Enviados</h3>
+          <h3>Recibidos</h3>
           <ul class="list-group">
             <li *ngFor="let mensaje of mensajes[empleadorId]?.mensajes_enviados" class="list-group-item mensaje-enviado">
               <p>{{ mensaje.mensaje }}</p>
             </li>
           </ul>
-          <h3>Recibidos</h3>
+          <h3>Enviados</h3>
           <ul class="list-group">
             <li *ngFor="let mensaje of mensajes[empleadorId]?.mensajes_recibidos" class="list-group-item mensaje-recibido">
               <p>{{ mensaje.mensaje }}</p>

@@ -32,8 +32,9 @@
   </ul>
 
   <h2>Trabajadores</h2>
+  <input type="text" class="form-control mb-3" [(ngModel)]="filtro" (input)="filtrarTrabajadores()" placeholder="Buscar por nombre o habilidades...">
   <ul class="list-group">
-    <li *ngFor="let trabajador of trabajadores" class="list-group-item">
+    <li *ngFor="let trabajador of trabajadoresFiltrados" class="list-group-item">
       <p><strong>Nombre:</strong> {{ trabajador.nombre }} {{ trabajador.apellido }}</p>
       <p><strong>Habilidades:</strong> {{ trabajador.habilidades }}</p>
       <p><strong>Disponible:</strong> {{ trabajador.disponible ? 'Sí' : 'No' }}</p>

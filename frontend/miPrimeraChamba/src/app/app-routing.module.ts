@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'iniciar-sesion', component: IniciarSesionComponent },
   { path: 'registrarse', component: RegistrarseComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: '', component: MainComponent }
+  { path: 'main', component: MainComponent },
+  { path: '', redirectTo: '/main', pathMatch: 'full' }
 ];
 
 @NgModule({

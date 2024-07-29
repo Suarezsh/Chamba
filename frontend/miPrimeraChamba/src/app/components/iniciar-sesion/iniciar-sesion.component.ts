@@ -21,7 +21,7 @@ export class IniciarSesionComponent {
       this.authService.iniciarSesion(this.email, this.password).subscribe(
         (response: any) => {
           this.cookieService.set('userId', response.id);
-          this.router.navigate(['/dashboard']);  // Redirigir al componente dashboard
+          this.router.navigate(['/dashboard']);  
         },
         (error: any) => {
           this.errorMessage = error.error.error;

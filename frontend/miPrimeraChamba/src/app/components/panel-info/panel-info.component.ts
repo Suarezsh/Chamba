@@ -9,8 +9,8 @@ export class PanelInfoComponent {
 
   @Input() imageUrl: string = '/../../logo1.png';  
 
-  @Input() liveJobs: number = 0;
-  @Input() companies: number = 0;
-  @Input() candidates: number = 0;
-  @Input() newJobs: number = 0;
+  @Input() liveJobs: number = 100;
+  @Input() companies: number = 100;
+  @Input() candidates: number = 999;
+  @Input() newJobs: number = 100;
 }

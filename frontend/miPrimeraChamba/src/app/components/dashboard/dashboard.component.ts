@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
   cerrarSesion(): void {
     if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
       this.cookieService.deleteAll();
-      this.router.navigate(['/iniciar-sesion']);
+      this.router.navigate(['/']);
     }
   }
 

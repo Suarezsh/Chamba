@@ -15,6 +15,8 @@ export class EmpleadorComponent implements OnInit {
   chambas: any[] = [];
   mensaje: string = '';
   trabajadores: any[] = [];
+  trabajadoresFiltrados: any[] = [];
+  filtro: string = '';
 
   constructor(private authService: AuthService, private cookieService: CookieService) {}
 
@@ -130,10 +132,19 @@ export class EmpleadorComponent implements OnInit {
           ...trabajador,
           mensajes: { mensajes_enviados: [], mensajes_recibidos: [] }
         }));
+        this.trabajadoresFiltrados = this.trabajadores;
       },
       (error: any) => {
         console.error('Error al listar los trabajadores:', error);
       }
+    );
+  }
+
+  filtrarTrabajadores(): void {
+    const filtroMinusculas = this.filtro.toLowerCase();
+    this.trabajadoresFiltrados = this.trabajadores.filter(trabajador =>
+      trabajador.nombre.toLowerCase().includes(filtroMinusculas) ||
+      trabajador.habilidades.toLowerCase().includes(filtroMinusculas)
     );
   }
 }

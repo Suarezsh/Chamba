@@ -1,14 +1,14 @@
-nav {
+.menu-nav {
     background-color: #8d8d8d;
-    padding: 1rem;
     color: #fff;
     display: flex;
     gap: 30px;
-    height: 15vh;
+    height: 60px;
     justify-content: center;
     align-items: center;
     border-bottom: 2px solid #444;
     transition: background-color 0.3s ease, border-bottom 0.3s ease;
+    
   }
   
   nav:hover {
@@ -18,7 +18,7 @@ nav {
 
   
   .logo img {
-    width: 200px;
+    width: 100px;
     transition: transform 0.3s ease;
   }
   
@@ -27,35 +27,7 @@ nav {
     border-color: #ccc;
   }
   
-  .search {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .search input {
-    width: 500px;
-    font-size: 20px;
-    padding: 20px 50px 20px 10px;
-    border-radius: 10px;
-    background-color: #444;
-    color: #fff;
-    border: none;
-}
-  
-  .search input:hover {
-    background-color: #555;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .search img {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    pointer-events: none;
-  }
+ 
   
   .options {
     display: flex;
@@ -141,6 +113,7 @@ nav {
   img {
     width: 40px;
     transition: transform 0.3s ease;
+    left: 10px;
   }
   
   img:hover {
@@ -148,49 +121,3 @@ nav {
     border-color: #ccc;
   }
   
-  /* Media Queries for Responsiveness */
-  @media (max-width: 960px) {
-    nav {
-      flex-wrap: wrap;
-      height: auto;
-    }
-    .logo{
-      font-size: 10px;   
-    }
-    .logo img {
-      width: 200px;
-    }
-  
-    .search input {
-      width: 85%;
-      font-size: 15px;
-    }
-  
-    .search img {
-      width: 20px;
-      height: 20px;
-    }
-  
-   .options {
-      gap: 30px;
-    }
-  
-   .options button {
-      width: 100%;
-      padding: 10px;
-    }
-  
-   .unregistered,.registered {
-      gap: 20px;
-    }
-  
-   .reg,.ing {
-      width: 100%;
-      padding: 10px;
-      font-size: 18px;
-    }
-  
-   .registered button img {
-      width: 80px;
-    }
-  }

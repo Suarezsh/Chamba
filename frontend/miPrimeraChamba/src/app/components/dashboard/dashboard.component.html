@@ -1,13 +1,20 @@
-<div> 
-  <nav>
-    <h1>Dashboard</h1>
-    <p>Nombre: {{ nombre }}</p>
-    <p>Apellido: {{ apellido }}</p>
-  </nav>
+<div>
+  <h1 id="dashboard-title">Dashboard</h1>
+  <p id="nombre">Nombre: {{ nombre }}</p>
+  <p id="apellido">Apellido: {{ apellido }}</p>
+  
+  <ng-container *ngIf="tipo === 'trabajador'">
+    <app-trabajador></app-trabajador>
+  </ng-container>
+  <ng-container *ngIf="tipo === 'empleador'">
+    <app-empleador></app-empleador>
+  </ng-container>
+<br>
+<hr>
 
 
-  <form (ngSubmit)="editarUsuario(editForm)" #editForm="ngForm"  class="editUser">
-
+<h3>Configuracion de datos personales</h3>
+  <form (ngSubmit)="editarUsuario(editForm)" #editForm="ngForm">
     <div>
       <label for="nombre">Nombre:</label>
       <input
@@ -18,7 +25,6 @@
         required
       />
     </div>
-    
     <div>
       <label for="apellido">Apellido:</label>
       <input
@@ -51,21 +57,8 @@
     <button type="submit">Actualizar</button>
   </form>
 
-  <ng-container *ngIf="tipo === 'trabajador'">
-
-    <app-trabajador></app-trabajador>
-
-  </ng-container>
-
-
-  <ng-container *ngIf="tipo === 'empleador'">
-    <app-empleador></app-empleador>
-  </ng-container>
-
   
-  <div class="button">
-    <button (click)="cerrarSesion()">Cerrar sesión</button>
-    <button (click)="generarPDF()">Generar PDF</button>
-  </div>
 
+  <button (click)="cerrarSesion()">Cerrar sesión</button>
+  <button (click)="generarPDF()">Generar datos de usuario (pdf)</button>
 </div>
