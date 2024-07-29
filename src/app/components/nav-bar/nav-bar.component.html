@@ -1,0 +1,16 @@
+<nav class="menu-nav">
+    <div class="logo">
+        <img src="../../logo1.png" alt="Logo">  
+    </div>
+    
+
+    <div *ngIf="!isRegistered()" class="unregistered">
+        <button  class="reg" (click)="register()">Registrarse</button>
+        <button class="ing"(click)="login()">Ingresar</button>
+    </div>
+
+    <div *ngIf="isRegistered()" class="registered">
+        <p class="name">{{ username }}</p>
+        <button onclick="(waos)"><img src="../../icon-user.png" alt="User"></button>
+    </div>
+</nav>

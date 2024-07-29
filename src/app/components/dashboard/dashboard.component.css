@@ -1,0 +1,132 @@
+#dashboard-title {
+    color: #4caf50;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    animation: bounce 2s infinite;
+  }
+  
+  #nombre,
+  #apellido {
+    text-align: center;
+    font-size: 18px;
+    color: #b01313;
+  }
+  
+  
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  div {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  form {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button[type="submit"]:hover {
+    background: #4cae4c;
+  }
+  
+  button {
+    width: 48%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:first-of-type {
+    background: #d9534f;
+    color: #fff;
+  }
+  
+  button:first-of-type:hover {
+    background: #c9302c;
+  }
+  
+  button:last-of-type {
+    background: #0275d8;
+    color: #fff;
+  }
+  
+  button:last-of-type:hover {
+    background: #025aa5;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    div {
+      padding: 10px;
+    }
+  
+    form {
+      padding: 15px;
+    }
+  
+    button {
+      width: 100%;
+      margin-top: 5px;
+    }
+  }
+  
