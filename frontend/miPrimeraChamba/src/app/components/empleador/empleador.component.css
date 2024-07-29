@@ -1,0 +1,46 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .list-group-item {
+    margin-bottom: 20px;
+  }
+  
+  .mensajes {
+    margin-top: 20px;
+  }
+  
+  .mensajes ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .mensajes li {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .mensajes li.enviado {
+    justify-content: flex-end;
+    background-color: #e1ffc7;
+  }
+  
+  .mensajes li.recibido {
+    justify-content: flex-start;
+    background-color: #fff;
+  }
+  
+  .mensajes li p {
+    margin: 0;
+  }
+  
+  .mensajes li small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+  }
+  

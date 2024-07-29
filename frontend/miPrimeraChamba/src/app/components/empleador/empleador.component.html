@@ -1,0 +1,68 @@
+<div class="container">
+  <h2>Publicar Chamba</h2>
+  <form (submit)="crearChamba()">
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input type="text" class="form-control" id="titulo" [(ngModel)]="titulo" name="titulo" required>
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea class="form-control" id="descripcion" [(ngModel)]="descripcion" name="descripcion" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="fechaInicio">Fecha de Inicio</label>
+      <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio" name="fechaInicio" required>
+    </div>
+    <div class="form-group">
+      <label for="fechaFin">Fecha de Fin</label>
+      <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin" name="fechaFin" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Chamba</button>
+  </form>
+
+  <h2>Chambas Publicadas</h2>
+  <ul class="list-group">
+    <li *ngFor="let chamba of chambas" class="list-group-item">
+      <h3>{{ chamba.titulo }}</h3>
+      <p>{{ chamba.descripcion }}</p>
+      <p><strong>Inicio:</strong> {{ chamba.fecha_inicio }}</p>
+      <p><strong>Fin:</strong> {{ chamba.fecha_fin }}</p>
+      <button (click)="eliminarChamba(chamba.id)" class="btn btn-danger">Eliminar</button>
+    </li>
+  </ul>
+
+  <h2>Trabajadores</h2>
+  <ul class="list-group">
+    <li *ngFor="let trabajador of trabajadores" class="list-group-item">
+      <p><strong>Nombre:</strong> {{ trabajador.nombre }} {{ trabajador.apellido }}</p>
+      <p><strong>Habilidades:</strong> {{ trabajador.habilidades }}</p>
+      <p><strong>Disponible:</strong> {{ trabajador.disponible ? 'Sí' : 'No' }}</p>
+
+      <form (submit)="enviarMensaje(trabajador.usuario_id)">
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea class="form-control" id="mensaje" [(ngModel)]="mensaje" name="mensaje" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+      </form>
+
+      <details>
+        <summary>Mensajes con este trabajador</summary>
+        <div class="mensajes">
+          <h3>Recibidos</h3>
+          <ul class="list-group">
+            <li *ngFor="let mensaje of trabajador.mensajes.mensajes_enviados" class="list-group-item">
+              <p>{{ mensaje.mensaje }}</p>
+            </li>
+          </ul>
+          <h3>Enviados</h3>
+          <ul class="list-group">
+            <li *ngFor="let mensaje of trabajador.mensajes.mensajes_recibidos" class="list-group-item">
+              <p>{{ mensaje.mensaje }}</p>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </li>
+  </ul>
+</div>
